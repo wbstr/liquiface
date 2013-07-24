@@ -1,0 +1,62 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.wcs.netbeans.liquiface.ui.wizards.dropfk;
+
+/*
+ * #%L
+ * Liquiface - GUI for Liquibase
+ * %%
+ * Copyright (C) 2013 Webstar Csoport Kft.
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
+
+import com.wcs.netbeans.liquiface.ui.wizards.AbstractWizardPanel;
+import org.openide.WizardDescriptor;
+import org.openide.WizardValidationException;
+
+public class DropForeignKeyWizardPanel1 extends AbstractWizardPanel{
+
+    private DropForeignKeyVisualPanel1 component;
+    private String tableName;
+
+    public DropForeignKeyWizardPanel1(String tableName) {
+        this.tableName = tableName;
+    }
+
+    @Override
+    public DropForeignKeyVisualPanel1 getComponent() {
+        if (component == null) {
+            component = new DropForeignKeyVisualPanel1(tableName);
+        }
+        return component;
+    }
+
+    @Override
+    public void storeSettings(WizardDescriptor wiz) {
+        wiz.putProperty(DropForeignKeyWizardConstants.CONSTRAINT_NAME, (String) getComponent().getSelectedFkField().getSelectedItem());
+    }
+
+    @Override
+    public void validate() throws WizardValidationException {
+        String fkName = (String) getComponent().getSelectedFkField().getSelectedItem();
+        if (fkName.equals("")){
+            throw new WizardValidationException(null, "The name is required!", null);
+        }
+    }
+}

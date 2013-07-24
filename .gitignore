@@ -1,4 +1,7 @@
-*.class
+nb-configuration.xml
+nbactions.xml
+target/
+*.orig
 
 # Package Files #
 *.jar

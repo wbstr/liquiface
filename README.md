@@ -1,4 +1,0 @@
-liquiface
-=========
-
-GUI for Liquibase
